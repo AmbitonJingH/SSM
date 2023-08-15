@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="book" class="com.atguigu.spring6.di.Book">
+        <property name="bname" value="前端开发"></property>
+        <property name="author" value="浩黄"></property>
+    </bean>
+    <bean id="book1" class="com.atguigu.spring6.di.Book">
+        <constructor-arg name="bname" value="不好看"></constructor-arg>
+        <constructor-arg name="author" value="还行"></constructor-arg>
+    </bean>
+</beans>
