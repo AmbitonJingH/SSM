@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--  p命名空间注入  -->
+    <bean id="studentp" class="com.atguigu.spring6.dimap.Student" p:sid="10111" p:sname="张三" p:lessonList-ref="Lesson" p:teacherMap-ref="Map">
+
+    </bean>
+
+    <bean id="lesson" class="com.atguigu.spring6.dimap.Lesson">
+        <property name="lname" value="原神"></property>
+    </bean>
+    <bean id="lesson1" class="com.atguigu.spring6.dimap.Lesson">
+        <property name="lname" value="超导"></property>
+    </bean>
+    <util:list id="Lesson">
+        <ref bean="lesson"></ref>
+        <ref bean="lesson1"></ref>
+    </util:list>
+    <util:map id="Map">
+        <entry>
+            <key>
+                <value>10010</value>
+            </key>
+            <ref bean="teacher"></ref>
+        </entry>
+        <entry>
+            <key>
+                <value>10011</value>
+            </key>
+            <ref bean="teacher1"></ref>
+        </entry>
+    </util:map>
+    <bean id="teacher" class="com.atguigu.spring6.dimap.Teacher">
+        <property name="tid" value="001"></property>
+        <property name="tname" value="王"></property>
+    </bean>
+    <bean id="teacher1" class="com.atguigu.spring6.dimap.Teacher">
+        <property name="tid" value="002"></property>
+        <property name="tname" value="李"></property>
+    </bean>
+    <bean id="student" class="com.atguigu.spring6.dimap.Student">
+        <property name="sid" value="100"></property>
+        <property name="sname" value="三张"></property>
+        <property name="lessonList" ref="Lesson"></property>
+        <property name="teacherMap" ref="Map"></property>
+    </bean>
+</beans>

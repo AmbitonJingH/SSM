@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="dept" class="com.atguigu.spring6.diTest.Dept">
+        <property name="dname" value="技术部"></property>
+        <property name="empList">
+            <list>
+                <ref bean="emp"></ref>
+                <ref bean="emp1"></ref>
+                <ref bean="emp2"></ref>
+            </list>
+        </property>
+    </bean>
+    <bean id="emp" class="com.atguigu.spring6.diTest.Emp">
+        <property name="ename" value="lqy"></property>
+        <property name="age" value="21"></property>
+        <property name="dept" ref="dept"></property>
+        <!--    数组注入    -->
+        <property name="hobbies">
+            <array>
+                <value>唱</value>
+                <value>rap</value>
+                <value>跳</value>
+            </array>
+        </property>
+    </bean>
+    <bean id="emp1" class="com.atguigu.spring6.diTest.Emp">
+        <property name="ename" value="tom"></property>
+        <property name="age" value="23"></property>
+        <property name="dept" ref="dept"></property>
+        <!--    数组注入    -->
+        <property name="hobbies">
+            <array>
+                <value>rap</value>
+                <value>跳</value>
+                <value>唱</value>
+            </array>
+        </property>
+    </bean>
+    <bean id="emp2" class="com.atguigu.spring6.diTest.Emp">
+        <property name="ename" value="hh"></property>
+        <property name="age" value="18"></property>
+        <property name="dept" ref="dept"></property>
+        <!--    数组注入    -->
+        <property name="hobbies">
+            <array>
+                <value>唱</value>
+                <value>跳</value>
+                <value>级</value>
+            </array>
+        </property>
+    </bean>
+</beans>

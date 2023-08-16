@@ -18,7 +18,7 @@ public class TestBook {
     }
 
     @Test
-    public void test1(){
+        public void test1(){
         ApplicationContext context = new ClassPathXmlApplicationContext("bean-di.xml");
         Book book = context.getBean("book1", Book.class);
         System.out.println(book);

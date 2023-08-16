@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- 数组类型属性   -->
+    <bean id="emp" class="com.atguigu.spring6.diTest.Emp">
+        <property name="ename" value="lqy"></property>
+        <property name="age" value="21"></property>
+        <property name="dept" ref="dept"></property>
+    <!--    数组注入    -->
+        <property name="hobbies">
+            <array>
+                <value>唱</value>
+                <value>跳</value>
+                <value>rap</value>
+            </array>
+        </property>
+    </bean>
+    <bean id="dept" class="com.atguigu.spring6.diTest.Dept">
+        <property name="dname" value="铁路"></property>
+    </bean>
+</beans>
