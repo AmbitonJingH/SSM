@@ -13,4 +13,7 @@ import java.util.List;
 public interface SpecialSqlMapper {
     List<User> getUserByLike(@Param("mohu") String mohu);
     void deleteMoreUser(@Param("ids") String ids);
+    List<User> getUserList(@Param("tableName") String tableName);
+    //添加用户信息并获取自增的主键
+    void insertUser(User user);
 }

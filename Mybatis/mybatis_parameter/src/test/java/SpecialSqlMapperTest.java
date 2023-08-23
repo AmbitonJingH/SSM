@@ -27,4 +27,21 @@ public class SpecialSqlMapperTest {
         SpecialSqlMapper mapper = sqlSession.getMapper(SpecialSqlMapper.class);
         mapper.deleteMoreUser("12,20");
     }
+
+    @Test
+    public void test2(){
+        SqlSession sqlSession = SqlSessionUtil.getSqlSession("mybatis-config.xml");
+        SpecialSqlMapper mapper = sqlSession.getMapper(SpecialSqlMapper.class);
+        List<User> list = mapper.getUserList("t_user");
+        System.out.println(list);
+    }
+
+    @Test
+    public void test3(){
+        SqlSession sqlSession = SqlSessionUtil.getSqlSession("mybatis-config.xml");
+        SpecialSqlMapper mapper = sqlSession.getMapper(SpecialSqlMapper.class);
+        User user = new User(null, "user3", "123456", 30, "女", "123456@qq.com");
+        mapper.insertUser(user);
+        System.out.println(user);
+    }
 }
