@@ -27,10 +27,13 @@
             </bean>
         </property>
     </bean>
+<!--配置默认的servlet处理静态资源-->
+    <mvc:default-servlet-handler/>
 <!--开启MVC的注解驱动-->
     <mvc:annotation-driven/>
 <!--配置视图控制器-->
     <mvc:view-controller path="/" view-name="index"></mvc:view-controller>
+    <mvc:view-controller path="/to/add" view-name="employee_add"></mvc:view-controller>
     <!--
         处理静态资源，例如html、js、css、jpg
         若只设置该标签，则只能访问静态资源，其他请求则无法访问

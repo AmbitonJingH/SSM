@@ -10,7 +10,7 @@ import com.atguigu.pojo.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -35,4 +35,35 @@ public class EmployeeController {
         list.forEach(System.out::println);
         return "employee_list";
     }
+
+   @RequestMapping("/employee")
+    public String addUser(Employee employee){
+       System.out.println(employee);
+        //保存员工信息
+        employeeDao.save(employee);
+        //重定向到列表功能
+        return "redirect:/employee";
+    }
+
+    @GetMapping("/employee/{id}")
+    public String toUpdate(@PathVariable("id") Integer id,Model model){
+        Employee employee = employeeDao.get(id);
+        model.addAttribute("employee",employee);
+        return "employee_update";
+    }
+
+    @PutMapping("/employee")
+    public String updateUser(Employee employee){
+        employeeDao.save(employee);
+        return "redirect:employee";
+    }
+
+    @DeleteMapping("/employee/{id}")
+    public String deleteUser(@PathVariable("id") Integer id){
+        //删除员工信息
+        employeeDao.delete(id);
+        //重定向到列表功能：/employee
+        return "redirect:/employee";
+    }
+
 }
