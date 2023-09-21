@@ -29,6 +29,11 @@
             <version>1.2.8</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <!--    SpringBoot应用打包插件-->

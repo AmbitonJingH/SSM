@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎</title>
+</head>
+<body>
+<a th:href="@{/list}">去列表页</a>
+<a href="www.baidu.com">百度</a>
+th:text :替换标签体的内容
+th:utext：替换标签体的内容，但不会转义html标签
+    <h1>来了奥：<span th:text="${text}"></span></h1>
+    <h1>来了奥：<span th:utext="${text}"></span></h1>
+<hr>
+<img th:src="${imgUrl}" style="width: 300px"/>
+th:attr :任意属性指定
+<img th:src="@{${imgUrl}}" style="width: 300px" th:attr="src=${imgUrl},style=${style}"/><br>
+<img th:src="@{${imgUrl}}" th:if="${show}">
+<hr>
+<span th:text="${#strings.toUpperCase(name)}"></span>
+</body>
+</html>

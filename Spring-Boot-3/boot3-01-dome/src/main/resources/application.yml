@@ -1,0 +1,37 @@
+person:
+  name: '张三 \n 123'
+  age: 21
+  birthDay: 2010/10/10 12:12:12
+  like: false
+  child:
+    name: "三张 \n 456"
+    age: 5
+    birthDay: 2026/10/10 12:12:12
+    text:
+      - abc
+      - def
+      - cxk
+      - |
+        dogs:
+          - name: 黑子
+            age: 2
+          - name: 白子
+            age: 2
+      - >
+        aaa
+        bbb
+        ccc
+        ddd
+    #text:["abc","def","cxk"]
+  dogs:
+    - name: 黑子
+      age: 2
+    - name: 白子
+      age: 2
+  cats:
+      c1:
+        name: 小黑子
+        age: 1
+      c2: {name: 大白子,age: 1} #对象也可以用{}表示
+
+
