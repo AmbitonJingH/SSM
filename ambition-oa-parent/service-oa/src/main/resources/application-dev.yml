@@ -8,7 +8,7 @@ mybatis-plus:
         db-config:
           logic-delete-value: 1
           logic-not-delete-value: 0
-  mapper-locations: classpath:com/ambitionjh/auth/mapper/xml/*.xml
+  mapper-locations: classpath:com/ambitionjh/*/mapper/xml/*.xml
 
 spring:
   datasource:
