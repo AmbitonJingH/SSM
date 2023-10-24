@@ -10,6 +10,7 @@ import com.ambitionjh.common.jwt.JwtHelper;
 import com.ambitionjh.common.result.ResponseUtil;
 import com.ambitionjh.common.result.Result;
 import com.ambitionjh.common.result.ResultCodeEnum;
+import com.ambitionjh.security.custom.LoginUserInfoHelper;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -56,6 +57,9 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         if(!StringUtils.isEmpty(token)){
             String username = JwtHelper.getUsername(token);
             if(!StringUtils.isEmpty(username)){
+                //当前用户信息放到ThreadLocal里面
+                LoginUserInfoHelper.setUserId(JwtHelper.getUserId(token));
+                LoginUserInfoHelper.setUsername(username);
                 //通过username从redis里获取权限数据
                 String authString = (String) redisTemplate.opsForValue().get(username);
                 //把redis获取字符串权限数据转换成要求的集合类型
