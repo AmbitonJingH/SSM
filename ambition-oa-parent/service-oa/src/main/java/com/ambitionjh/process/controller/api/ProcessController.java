@@ -6,18 +6,23 @@ package com.ambitionjh.process.controller.api;
  */
 
 import com.ambitionjh.common.result.Result;
+import com.ambitionjh.model.process.Process;
 import com.ambitionjh.model.process.ProcessTemplate;
 import com.ambitionjh.model.process.ProcessType;
 import com.ambitionjh.process.service.OaProcessService;
 import com.ambitionjh.process.service.OaProcessTemplateService;
 import com.ambitionjh.process.service.OaProcessTypeService;
 import com.ambitionjh.vo.process.ProcessFormVo;
+import com.ambitionjh.vo.process.ProcessVo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Api(tags = "审批流管理")
 @RestController
@@ -49,5 +54,21 @@ public class ProcessController {
     public Result startUp(@RequestBody ProcessFormVo processFormVo){
         processService.startUp(processFormVo);
         return Result.ok();
+    }
+
+    @ApiOperation("待处理")
+    @GetMapping("/findPending/{page}/{limit}")
+    public Result findPending(@PathVariable Long page,
+                              @PathVariable Long limit){
+        Page<Process> pageParam = new Page<>(page,limit);
+        IPage<ProcessVo> pageModel = processService.findPending(pageParam);
+        return Result.ok(pageModel);
+    }
+
+    //查看审批详情信息
+    @GetMapping("show/{id}")
+    public Result show (@PathVariable Long id){
+        Map<String,Object> map = processService.show(id);
+        return Result.ok(map);
     }
 }
