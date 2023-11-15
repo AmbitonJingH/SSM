@@ -52,3 +52,8 @@ spring:
     check-process-definitions: true
   main:
     allow-circular-references: true
+wechat:
+  mpAppId: wxf171d8a244ee930c
+  mpAppSecret: 34645d8c9f73d74a6369aee4b17dd9d2
+  # 授权回调获取用户信息接口地址
+  userInfoUrl: http://ambitionoa1.v5.idcfengye.com/admin/wechat/userInfo
