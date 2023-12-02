@@ -1,0 +1,22 @@
+server:
+  port: 8800
+
+#application-dev.yml 加入配置
+#此为默认值，如果你的默认值和mp默认的一样，则不需要该配置
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  mapper-locations: classpath:com/cf/boke/mapper/*.xml
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/boke?serverTimezone=GMT%2B8&useSSL=false&characterEncoding=utf-8&nullCatalogMeansCurrent=true
+    username: root
+    password: 123456
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
