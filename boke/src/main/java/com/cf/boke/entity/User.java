@@ -1,9 +1,11 @@
 package com.cf.boke.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.io.Serializable;
 @Data
+
 public class User implements Serializable {
     private Integer id = 0;
 
@@ -24,6 +26,9 @@ public class User implements Serializable {
     private String introduction;
 
     private static final long serialVersionUID = 1L;
+
+    @TableField(exist = false)
+    private String token;
 
 
     @Override

@@ -5,11 +5,9 @@ import com.cf.boke.entity.User;
 import com.cf.boke.exception.BokeException;
 import com.cf.boke.result.Result;
 import com.cf.boke.service.UserService;
+import com.cf.boke.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /*
  * @author  AmbitionJingH
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/admin/system/index")
+@CrossOrigin
 public class IndexController {
     @Autowired
     private UserService userService;
@@ -45,6 +44,7 @@ public class IndexController {
         if (user == null){
             throw new BokeException(201,"用户不存在！");
         }
-        return Result.ok();
+        user.setToken(TokenUtils.createToken(String.valueOf(user.getId()),user.getPassword()));
+        return Result.ok(user);
     }
 }

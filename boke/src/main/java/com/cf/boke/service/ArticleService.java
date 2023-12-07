@@ -7,7 +7,9 @@ package com.cf.boke.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cf.boke.entity.Article;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface ArticleService extends IService<Article> {
 
 }
