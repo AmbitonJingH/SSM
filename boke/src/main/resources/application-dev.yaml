@@ -21,3 +21,9 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
+  jpa:
+    hibernate:
+      ddl-auto:
+    jackson:
+      date-format: yyyy-MM-dd
+      time-zone: GMT+8

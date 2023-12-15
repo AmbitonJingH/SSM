@@ -1,5 +1,7 @@
 package com.cf.boke.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -11,6 +13,9 @@ public class Article implements Serializable {
     private Integer userId;
 
     private Integer sortId;
+
+    @TableField(exist = false)
+    private String sorted;
 
     private Integer labelId;
 
@@ -24,10 +29,12 @@ public class Article implements Serializable {
 
     private Integer commentStatus;
 
-    private Integer recommendStatus;
+    private Integer recommendCount;
 
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date createTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date updateTime;
 
     private String updateBy;
@@ -57,7 +64,7 @@ public class Article implements Serializable {
             && (this.getArticleContent() == null ? other.getArticleContent() == null : this.getArticleContent().equals(other.getArticleContent()))
             && (this.getTips() == null ? other.getTips() == null : this.getTips().equals(other.getTips()))
             && (this.getCommentStatus() == null ? other.getCommentStatus() == null : this.getCommentStatus().equals(other.getCommentStatus()))
-            && (this.getRecommendStatus() == null ? other.getRecommendStatus() == null : this.getRecommendStatus().equals(other.getRecommendStatus()))
+            && (this.getRecommendCount() == null ? other.getRecommendCount() == null : this.getRecommendCount().equals(other.getRecommendCount()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
             && (this.getUpdateBy() == null ? other.getUpdateBy() == null : this.getUpdateBy().equals(other.getUpdateBy()))
@@ -77,7 +84,7 @@ public class Article implements Serializable {
         result = prime * result + ((getArticleContent() == null) ? 0 : getArticleContent().hashCode());
         result = prime * result + ((getTips() == null) ? 0 : getTips().hashCode());
         result = prime * result + ((getCommentStatus() == null) ? 0 : getCommentStatus().hashCode());
-        result = prime * result + ((getRecommendStatus() == null) ? 0 : getRecommendStatus().hashCode());
+        result = prime * result + ((getRecommendCount() == null) ? 0 : getRecommendCount().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getUpdateBy() == null) ? 0 : getUpdateBy().hashCode());
@@ -100,7 +107,7 @@ public class Article implements Serializable {
         sb.append(", articleContent=").append(articleContent);
         sb.append(", tips=").append(tips);
         sb.append(", commentStatus=").append(commentStatus);
-        sb.append(", recommendStatus=").append(recommendStatus);
+        sb.append(", recommendStatus=").append(recommendCount);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", updateBy=").append(updateBy);

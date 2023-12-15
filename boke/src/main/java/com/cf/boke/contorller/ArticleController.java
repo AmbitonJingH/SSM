@@ -3,18 +3,12 @@ package com.cf.boke.contorller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.cf.boke.entity.Article;
 import com.cf.boke.entity.Sorted;
-import com.cf.boke.entity.User;
 import com.cf.boke.result.Result;
 import com.cf.boke.service.ArticleService;
-import com.cf.boke.service.UserService;
 import com.cf.boke.utils.TokenUtils;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /*
  * @author  AmbitionJingH
@@ -28,8 +22,6 @@ public class ArticleController {
 
     @Autowired
     private ArticleService articleService;
-    @Autowired
-    private UserService userService;
 
     //展示所有文章
     @RequestMapping("show")
@@ -55,9 +47,11 @@ public class ArticleController {
                     break;
                 }
             }
-            Map<String, List> map = new HashMap<>();
-            map.put(sortedName,list);
-            return Result.ok(map);
+            for (Article temp : list){
+                temp.setSorted(sortedName);
+            }
+
+            return Result.ok(list);
         }
         return Result.fail();
     }
@@ -68,6 +62,7 @@ public class ArticleController {
         LambdaQueryWrapper<Article> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Article::getId,id);
         Article article = articleService.getOne(wrapper);
+        System.out.println(article);
         return Result.ok(article);
     }
 
@@ -84,13 +79,43 @@ public class ArticleController {
     //删除文章
     @RequestMapping("remove/{id}")
     public Result removeArticle(@PathVariable Integer id){
-//        LambdaQueryWrapper<Article> wrapper = new LambdaQueryWrapper<>();
-//        wrapper.eq(Article::getId,id);
         boolean removed = articleService.removeById(id);
-        //boolean removed = articleService.remove(wrapper);
         if(removed)
             return Result.ok();
         else
             return Result.fail();
+    }
+
+    @RequestMapping("myArticle")
+    public Result myArticle(){
+        Integer userId = Integer.parseInt(TokenUtils.getUserId());
+        LambdaQueryWrapper<Article> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Article::getUserId,userId);
+        List<Article> myArticles = articleService.list(wrapper);
+        return Result.ok(myArticles);
+    }
+
+    @RequestMapping("getArticle/like/{name}")
+    public Result getArticle(@PathVariable String name){
+        LambdaQueryWrapper<Article> wrapper = new LambdaQueryWrapper<>();
+        wrapper.like(Article::getArticleTitle,name);
+        List<Article> list = articleService.list(wrapper);
+        return Result.ok(list);
+    }
+
+    @RequestMapping("like/{articleId}")
+    public Result like(@PathVariable Integer articleId){
+        Article article = articleService.getById(articleId);
+        article.setRecommendCount(article.getRecommendCount()+1);
+        articleService.updateById(article);
+        return Result.ok();
+    }
+
+    @RequestMapping("disLike/{articleId}")
+    public Result disLike(@PathVariable Integer articleId){
+        Article article = articleService.getById(articleId);
+        article.setRecommendCount(article.getRecommendCount()-1);
+        articleService.updateById(article);
+        return Result.ok();
     }
 }
